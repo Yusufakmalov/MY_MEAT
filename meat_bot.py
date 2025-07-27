@@ -56,12 +56,7 @@ async def check_subscription(user_id, context):
         logger.error(f"Subscription check error for user {user_id}: {e}")
         return False
 
-def db_connect():
-    try:
-        return psycopg2.connect(**DB_CONFIG)
-    except Exception as e:
-        logger.error(f"Database connection failed: {e}")
-        return None
+
 
 def get_all_meats():
     conn = db_connect()
