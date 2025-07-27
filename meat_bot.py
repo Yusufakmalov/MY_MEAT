@@ -1,7 +1,6 @@
 import logging
 import os
 import psycopg2
-from dotenv import load_dotenv
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, InputFile
 from telegram.ext import (
     Application, CommandHandler, CallbackQueryHandler,
@@ -9,8 +8,9 @@ from telegram.ext import (
 )
 from telegram.error import BadRequest
 
-# Load environment variables
-load_dotenv()
+if os.path.exists(".env"):
+    from dotenv import load_dotenv
+    load_dotenv()
 
 # Constants from .env
 TG_TOKEN = os.getenv("TG_BOT_TOKEN")
