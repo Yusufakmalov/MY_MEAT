@@ -35,13 +35,11 @@ CHANNEL_LINK = os.getenv("CHANNEL_LINK")
 CREATOR_ID = int(os.getenv("CREATOR_ID", "0"))
 
 # PostgreSQL credentials
+# Remove separate PG_* variables — use DATABASE_URL only
 DB_CONFIG = {
-    'host': os.getenv('PG_HOST'),
-    'port': os.getenv('PG_PORT'),
-    'user': os.getenv('PG_USER'),
-    'password': os.getenv('PG_PASSWORD'),
-    'dbname': os.getenv('PG_DATABASE'),
+    'dsn': DATABASE_URL
 }
+
 
 # Enable logging
 logging.basicConfig(
@@ -73,10 +71,11 @@ async def check_subscription(user_id, context):
 
 def db_connect():
     try:
-        return psycopg2.connect(**DB_CONFIG)
+        return psycopg2.connect(DATABASE_URL)
     except Exception as e:
         logger.error(f"Database connection failed: {e}")
         return None
+
 
 def get_all_meats():
     conn = db_connect()
