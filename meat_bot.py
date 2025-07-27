@@ -7,19 +7,10 @@ from telegram.ext import (
     ContextTypes, MessageHandler, filters
 )
 from telegram.error import BadRequest
-import urllib.parse as up   
 
 if os.path.exists(".env"):
     from dotenv import load_dotenv
     load_dotenv()
-
-db_url = os.getenv("DATABASE_URL")
-
-if not db_url:
-    raise ValueError("Missing DATABASE_URL environment variable")
-
-up.uses_netloc.append("postgres")
-url = up.urlparse(db_url)
 
 # Constants from .env
 TG_TOKEN = os.getenv("TG_BOT_TOKEN")
@@ -29,15 +20,12 @@ CREATOR_ID = int(os.getenv("CREATOR_ID", "0"))
 
 # PostgreSQL credentials
 DB_CONFIG = {
-    'dbname': url.path[1:],
-    'user': url.username,
-    'password': url.password,
-    'host': url.hostname,
-    'port': url.port,
+    'host': os.getenv('PG_HOST'),
+    'port': os.getenv('PG_PORT'),
+    'user': os.getenv('PG_USER'),
+    'password': os.getenv('PG_PASSWORD'),
+    'dbname': os.getenv('PG_DATABASE'),
 }
-
-# Example connection
-conn = psycopg2.connect(**DB_CONFIG)
 
 # Enable logging
 logging.basicConfig(
