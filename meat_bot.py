@@ -18,14 +18,15 @@ CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME")
 CHANNEL_LINK = os.getenv("CHANNEL_LINK")
 CREATOR_ID = int(os.getenv("CREATOR_ID", "0"))
 
-# PostgreSQL credentials
-DB_CONFIG = {
-    'host': os.getenv('PG_HOST'),
-    'port': os.getenv('PG_PORT'),
-    'user': os.getenv('PG_USER'),
-    'password': os.getenv('PG_PASSWORD'),
-    'dbname': os.getenv('PG_DATABASE'),
-}
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+def db_connect():
+    try:
+        return psycopg2.connect(DATABASE_URL)
+    except Exception as e:
+        logger.error(f"Database connection failed: {e}")
+        return None
 
 # Enable logging
 logging.basicConfig(
