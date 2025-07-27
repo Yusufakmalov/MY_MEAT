@@ -239,6 +239,24 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("Bu buyruqni tanib bolmadi. Iltimos /start buyrug'ini ishlatishni unutmang.")
 
+
+async def test_db(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    try:
+        conn = psycopg2.connect(DATABASE_URL)
+        cursor = conn.cursor()
+        cursor.execute("SELECT name, price FROM meat LIMIT 5;")
+        rows = cursor.fetchall()
+        if not rows:
+            await update.message.reply_text("❌ No meat records found in database.")
+        else:
+            response = "🥩 Top 5 Meat Products:\n\n"
+            for name, price in rows:
+                response += f"• {name} - {price} so'm\n"
+            await update.message.reply_text(response)
+        cursor.close()
+        conn.close()
+    except Exception as e:
+        await update.message.reply_text(f"⚠️ Error connecting to DB:\n{e}")
 # --- Main Entrypoint ---
 def main():
     if not TG_TOKEN or not CHANNEL_USERNAME or not CHANNEL_LINK:
@@ -249,6 +267,7 @@ def main():
     app.add_handler(CommandHandler('start', start))
     app.add_handler(CallbackQueryHandler(button))
     app.add_handler(MessageHandler(filters.COMMAND, unknown))
+    app.add_handler(CommandHandler("testdb", test_db))
 
     logger.info("Bot is running...")
     app.run_polling()
