@@ -8,26 +8,9 @@ from telegram.ext import (
 )
 from telegram.error import BadRequest
 
-
 if os.path.exists(".env"):
     from dotenv import load_dotenv
     load_dotenv()
-
-
-DATABASE_URL = os.environ.get("DATABASE_URL")
-if not DATABASE_URL:
-    raise ValueError("Missing DATABASE_URL environment variable")
-
-# Example: using with psycopg2
-
-conn = psycopg2.connect(DATABASE_URL)
-cursor = conn.cursor()
-
-cursor.execute("SELECT NOW();")
-print("Connected. Time:", cursor.fetchone())
-
-cursor.close()
-conn.close()
 
 # Constants from .env
 TG_TOKEN = os.getenv("TG_BOT_TOKEN")
