@@ -187,13 +187,13 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif data == "video_process":
         video_path = "video/meat_processing.mp4"
         with open(video_path, 'rb') as video:
-            await context.bot.send_video(chat_id=query.message.chat_id, video=video, caption="🔪 Go‘sht so'yilish jarayoni")
+            await context.bot.send_video(chat_id=query.message.chat_id, video=video, caption="🔪  So'yilish jarayoni")
         await query.answer()
 
     elif data == "video_centers":
         video_path = "video/second-video.mp4"
         with open(video_path, 'rb') as video:
-            await context.bot.send_video(chat_id=query.message.chat_id, video=video, caption="🏢 Go‘sht markazlari")
+            await context.bot.send_video(chat_id=query.message.chat_id, video=video, caption="🏢 Taqvo savdo rastalari")
         await query.answer()
 
     elif data == "meats":
