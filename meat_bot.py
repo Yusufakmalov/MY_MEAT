@@ -240,7 +240,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
 "Biz mustahkam hamkorlik va mahsulot\nsifatini doimiy ravishda ta’minlaymiz", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='back')]]))
 
     elif data == "contacts":
-        await query.edit_message_text("\U0001F4DE Biz bilan bog'lanish:\nTelefon: +998 99 301 11 18, +998 99 832 04 27, +998 99 882 40 24\nManzil: Toshkent shahri", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='back')]]))
+        await query.edit_message_text("\U0001F4DE Biz bilan bog'lanish:\nBosh ofis: +998 99 301 11 18(Anvar), +998 93 390 00 18(Kozimhon)\nToshkent shahar bozorlari: +998 97 735 00 03(Izzatuloh), +998 93 587 91 11(Shaxzod)\nOperator: +998 99 832 04 27, +998 99 882 40 24\nManzil: Toshkent shahri", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='back')]]))
 
     elif data == "back":
         await query.edit_message_text("Asosiy menu:", reply_markup=get_main_menu_keyboard())
