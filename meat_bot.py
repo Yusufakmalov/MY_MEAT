@@ -240,7 +240,25 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
 "Biz mustahkam hamkorlik va mahsulot\nsifatini doimiy ravishda ta’minlaymiz", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='back')]]))
 
     elif data == "contacts":
-        await query.edit_message_text("\U0001F4DE Biz bilan bog'lanish:\nBosh ofis:\n +998 99 301 11 18(Anvar), +998 93 390 00 18(Kozimhon)\nToshkent shahar bozorlari:\n +998 97 735 00 03(Izzatuloh), +998 93 587 91 11(Shaxzod)\nOperator:\n +998 99 832 04 27, +998 99 882 40 24\nManzil: Toshkent shahri", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='back')]]))
+        contact_buttons = [
+            [InlineKeyboardButton("Bosh ofis", callback_data="contact_office")],
+            [InlineKeyboardButton("Toshkent shahar bozorlari", callback_data="contact_markets")],
+            [InlineKeyboardButton("Operator", callback_data="contact_operator")],
+            [InlineKeyboardButton('\U0001F519 Orqaga', callback_data='back')]
+        ]
+        await query.edit_message_text("\U0001F4DE Biz bilan bog'lanish uchun bo'limni tanlang:", reply_markup=InlineKeyboardMarkup(contact_buttons))
+
+    elif data == "contact_office":
+        office_text = "<b>Bosh ofis:</b>\n+998 99 301 11 18 (Anvar)\n+998 93 390 00 18 (Kozimhon)"
+        await query.edit_message_text(office_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
+
+    elif data == "contact_markets":
+        markets_text = "<b>Toshkent shahar bozorlari:</b>\n+998 97 735 00 03 (Izzatuloh)\n+998 93 587 91 11 (Shaxzod)"
+        await query.edit_message_text(markets_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
+
+    elif data == "contact_operator":
+        operator_text = "<b>Operator:</b>\n+998 99 832 04 27 (Yusuf)\n+998 99 882 40 24 (Akmal)"
+        await query.edit_message_text(operator_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
 
     elif data == "back":
         await query.edit_message_text("Asosiy menu:", reply_markup=get_main_menu_keyboard())
