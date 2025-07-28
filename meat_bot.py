@@ -258,7 +258,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.edit_message_text(markets_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
 
     elif data == "call-center":
-        office_text = "<b>Call center:</b>\n+998 55 510 08 08"
+        office_text = "<b>Call center:</b>\n+998 55 510 08 08\n+998 55 502 40 40"
         await query.edit_message_text(office_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
     
     elif data == "contact_operator":
