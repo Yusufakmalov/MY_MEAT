@@ -244,6 +244,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
             [InlineKeyboardButton("Bosh ofis", callback_data="contact_office")],
             [InlineKeyboardButton("Toshkent shahar bozorlari", callback_data="contact_markets")],
             [InlineKeyboardButton("Operator", callback_data="contact_operator")],
+            [InlineKeyboardButton("Call center", callback_data="call-center")],
             [InlineKeyboardButton('\U0001F519 Orqaga', callback_data='back')]
         ]
         await query.edit_message_text("\U0001F4DE Biz bilan bog'lanish uchun bo'limni tanlang:", reply_markup=InlineKeyboardMarkup(contact_buttons))
@@ -256,6 +257,10 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
         markets_text = "<b>Toshkent shahar bozorlari:</b>\n+998 97 735 00 03 (Izzatuloh)\n+998 93 587 91 11 (Shaxzod)"
         await query.edit_message_text(markets_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
 
+    elif data == "call-center":
+        office_text = "<b>Call center:</b>\n+998 55 510 08 08"
+        await query.edit_message_text(office_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
+    
     elif data == "contact_operator":
         operator_text = "<b>Operator:</b>\n+998 99 832 04 27 (Yusuf)\n+998 99 882 40 24 (Akmal)"
         await query.edit_message_text(operator_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
