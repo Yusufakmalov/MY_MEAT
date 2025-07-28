@@ -42,7 +42,7 @@ CERTIFICATE_IMAGES = {
 }
 
 # Local video file path
-VIDEO_PATH = "video/meat_processing.mp4"
+VIDEO_PATH = "video/meat_processing.mp4, video/second_video.mp4"
 
 # --- Utility Functions ---
 async def check_subscription(user_id, context):
@@ -226,7 +226,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
 "Biz mustahkam hamkorlik va mahsulot\nsifatini doimiy ravishda ta’minlaymiz", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='back')]]))
 
     elif data == "contacts":
-        await query.edit_message_text("\U0001F4DE Biz bilan bog'lanish:\nTelefon: +998 99 301 11 11\nManzil: Toshkent shahri", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='back')]]))
+        await query.edit_message_text("\U0001F4DE Biz bilan bog'lanish:\nTelefon: +998 99 301 11 18, +998 99 832 04 27, +998 99 882 40 24\nManzil: Toshkent shahri", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='back')]]))
 
     elif data == "back":
         await query.edit_message_text("Asosiy menu:", reply_markup=get_main_menu_keyboard())
