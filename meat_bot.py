@@ -243,13 +243,34 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.answer()
 
     elif data == "contacts":
-        contact_buttons = [
-            [InlineKeyboardButton("Bosh ofis", callback_data="contact_office")],
-            [InlineKeyboardButton("Toshkent shahar bozorlari", callback_data="contact_markets")],
-            [InlineKeyboardButton("Operator", callback_data="contact_operator")],
-            [InlineKeyboardButton("Call center", callback_data="call-center")],
-            [InlineKeyboardButton('\U0001F519 Orqaga', callback_data='back')]
+        # First row: main contacts
+        main_contacts = [
+            InlineKeyboardButton("Bosh ofis", callback_data="contact_office"),
+            InlineKeyboardButton("Toshkent shahar bozorlari", callback_data="contact_markets"),
+            InlineKeyboardButton("Operator", callback_data="contact_operator"),
+            InlineKeyboardButton("Call center", callback_data="call-center")
         ]
+        # Second row: regional markets
+        regional_contacts = [
+            InlineKeyboardButton("Toshkent viloyati", callback_data="toshkent_viloyat"),
+            InlineKeyboardButton("Namangan", callback_data="namangan_markets"),
+            InlineKeyboardButton("Andijon", callback_data="andijon_markets"),
+            InlineKeyboardButton("Farg'ona", callback_data="fargona_markets"),
+            InlineKeyboardButton("Qo'qon", callback_data="qoqon_markets"),
+            InlineKeyboardButton("Sirdaryo", callback_data="sirdaryo_markets"),
+            InlineKeyboardButton("Jizzax", callback_data="jizzax_markets"),
+            InlineKeyboardButton("Samarqand", callback_data="samarqand_markets"),
+            InlineKeyboardButton("Qashqadaryo", callback_data="qashqadaryo_markets"),
+            InlineKeyboardButton("Surxandaryo", callback_data="surxondaryo_markets"),
+            InlineKeyboardButton("Navoiy", callback_data="navoiy_markets"),
+            InlineKeyboardButton("Buxoro", callback_data="buxoro_markets"),
+            InlineKeyboardButton("Xorazm", callback_data="xorazm_markets"),
+            InlineKeyboardButton("To'rtko'l", callback_data="tortkol_markets")
+        ]
+        # Arrange regional contacts in rows of 4
+        regional_rows = [regional_contacts[i:i+4] for i in range(0, len(regional_contacts), 4)]
+        # Build full keyboard
+        contact_buttons = [main_contacts] + regional_rows + [[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='back')]]
         await query.edit_message_text("\U0001F4DE Biz bilan bog'lanish uchun bo'limni tanlang:", reply_markup=InlineKeyboardMarkup(contact_buttons))
 
     elif data == "contact_office":
@@ -257,9 +278,66 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.edit_message_text(office_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
 
     elif data == "contact_markets":
-        markets_text = "<b>Toshkent shahar bozorlari:</b>\n+998 97 735 00 03 (Izzatuloh)\n+998 93 587 91 11 (Shaxzod)"
+        markets_text = "<b>Toshkent shahar bozorlari:</b>\n+998 97 735 00 03 (Izzatuloh)\n+998 93 587 91 11 (Shaxzod)\n+998 99 301 11 18(Anvar)"
         await query.edit_message_text(markets_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
 
+    elif data == "toshkent_viloyat":
+        markets_text = "<b>Toshkent viloyati bozorlari:</b>\n+998 93 587 91 11 (Shaxzod)\n+998 99 301 11 18(Anvar)"
+        await query.edit_message_text(markets_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
+    
+    elif data == "namangan_markets":
+        markets_text = "<b>Namangan bozorlari:</b>\n+998 91 356 19 47 (Komolhon)\n+998 99 301 11 18(Anvar)\n+998 91 342 00 70(Abdulaziz)\n+998 94 170 07 75(Abdulahad)\n+998 99 395 25 21(Mahmudjon)"
+        await query.edit_message_text(markets_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
+    
+    elif data == "andijon_markets":
+        markets_text = "<b>Andijon viloyati bozorlari:</b>\n+998 91 612 17 11(Anvar)\n+998 93 496 25 55(Baxtiyor)"
+        await query.edit_message_text(markets_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
+    
+    elif data == "fargona_markets":
+        markets_text = "<b>Farg'ona viloyat bozorlari:</b>\n+998 90 231 33 40(Anora)\n+998 93 730 77 27(Asilbek)\n+998 99 301 11 18(Anvar)"
+        await query.edit_message_text(markets_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
+    
+    elif data == "qoqon_markets":
+        markets_text = "<b>Qo'qon shahar bozorlari:</b>\n+998 91 155 55 22 (Jamshid)\n+998 99 301 11 18(Anvar)\n+998 77 090 00 18(Murodjon)\n+998 90 556 93 32(Ag'zamhon)\n+998 99 556 93 32(Azamat)"
+        await query.edit_message_text(markets_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
+    
+    elif data == "sirdaryo_markets":
+        markets_text = "<b>Sirdaryo shahar bozorlari:</b>\n+998 99 772 00 03(Zafar Hoji)\n+998 99 301 11 18(Anvar)"
+        await query.edit_message_text(markets_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
+
+    elif data == "jizzax_markets":
+        markets_text = "<b>Jizzax shahar bozorlari:</b>\n+998 99 644 01 01(Abulaziz)\n+998 93 730 77 27(Asilbek)\n+998 99 301 11 18(Anvar)"
+        await query.edit_message_text(markets_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
+    
+    elif data == "samarqand_markets":
+        markets_text = "<b>Samarqand shahar bozorlari:</b>\n+998 94 044 04 00 (Baxtiyor)\n+998 99 301 11 18(Anvar)"
+        await query.edit_message_text(markets_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
+    
+    elif data == "qashqadaryo_markets":
+        markets_text = "<b>Qashqadaryo shahar bozorlari:</b>\n+998 99 301 11 18 (Anvar)"
+        await query.edit_message_text(markets_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
+    
+    elif data == "surxondaryo_markets":
+        markets_text = "<b>Surxondaryo shahar bozorlari:</b>\n+998 99 301 11 18 (Anvar)\n+998 97 414 40 92(Muhammad G'olib)"
+        await query.edit_message_text(markets_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
+    
+    elif data == "navoiy_markets":
+        markets_text = "<b>Navoiy shahar bozorlari:</b>\n+998 94 044 04 00 (Baxtiyor)\n+998 99 301 11 18(Anvar)"
+        await query.edit_message_text(markets_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
+    
+    elif data == "buxoro_markets":
+        markets_text = "<b>Buxoro shahar bozorlari:</b>\n+998 99 301 11 18(Anvar)\n+998 90 317 40 40(Temur)"
+        await query.edit_message_text(markets_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
+    
+    elif data == "xorazm_markets":
+        markets_text = "<b>Xorazm shahar bozorlari:</b>\n+998 99 301 11 18 (Anvar)"
+        await query.edit_message_text(markets_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
+    
+    elif data == "tortkol_markets":
+        markets_text = "<b>To'rtko'l shahar bozorlari:</b>\n+998 90 827 87 00 (Farruh)\n+998 99 301 11 18(Anvar)"
+        await query.edit_message_text(markets_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
+    
+    
     elif data == "call-center":
         office_text = "<b>Call center:</b>\n+998 55 510 08 08\n+998 55 502 40 40"
         await query.edit_message_text(office_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
