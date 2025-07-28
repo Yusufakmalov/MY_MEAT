@@ -41,8 +41,6 @@ CERTIFICATE_IMAGES = {
     "cert_halal": "certificates/halal_cert.png"
 }
 
-# Local video file path
-VIDEO_PATH = "video/meat_processing.mp4, video/second_video.mp4"
 
 # --- Utility Functions ---
 async def check_subscription(user_id, context):
@@ -178,8 +176,24 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.answer()
 
     elif data == "show_video":
-        with open(VIDEO_PATH, 'rb') as video:
-            await context.bot.send_video(chat_id=query.message.chat_id, video=video, caption="🔪 Go‘sht kesish jarayoni")
+        # Show two categories for video selection
+        video_buttons = [
+            [InlineKeyboardButton("Go'sht so'yilish jarayoni", callback_data="video_process")],
+            [InlineKeyboardButton("Go'sht markazlari", callback_data="video_centers")],
+            [InlineKeyboardButton('\U0001F519 Orqaga', callback_data='back')]
+        ]
+        await query.edit_message_text("Videolar kategoriyasini tanlang:", reply_markup=InlineKeyboardMarkup(video_buttons))
+
+    elif data == "video_process":
+        video_path = "video/meat_processing.mp4"
+        with open(video_path, 'rb') as video:
+            await context.bot.send_video(chat_id=query.message.chat_id, video=video, caption="🔪 Go‘sht so'yilish jarayoni")
+        await query.answer()
+
+    elif data == "video_centers":
+        video_path = "video/second-video.mp4"
+        with open(video_path, 'rb') as video:
+            await context.bot.send_video(chat_id=query.message.chat_id, video=video, caption="🏢 Go‘sht markazlari")
         await query.answer()
 
     elif data == "meats":
