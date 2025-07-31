@@ -347,7 +347,19 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.edit_message_text(operator_text, parse_mode='HTML', reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='contacts')]]))
 
     elif data == "back":
-        await query.edit_message_text("Asosiy menu:", reply_markup=get_main_menu_keyboard())
+        try:
+            # Try to edit text (works for text messages)
+            await query.edit_message_text("Asosiy menu:", reply_markup=get_main_menu_keyboard())
+        except BadRequest as e:
+            if "Message is not modified" in str(e):
+                pass  # Ignore harmless error
+            else:
+                try:
+                    # If it's a photo message, edit the caption instead
+                    await query.edit_message_caption("Asosiy menu:", reply_markup=get_main_menu_keyboard())
+                except Exception as ex:
+                    logger.error(f"Back button error: {ex}")
+        await query.answer()
 
 async def unknown(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("Bu buyruqni tanib bolmadi. Iltimos /start buyrug'ini ishlatishni unutmang.")
