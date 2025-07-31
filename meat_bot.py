@@ -233,22 +233,14 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await query.edit_message_text("Go'sht topilmadi.", reply_markup=InlineKeyboardMarkup([[InlineKeyboardButton('\U0001F519 Orqaga', callback_data='meats')]]))
 
     elif data == "about":
-        about_text = (
-            "\U0001F4D8 <b>Biz haqimizda:</b>\n\n"
-            "Biz 'Yunayted Invest' korxonasi O’zbekiston bozorida 4 yil davomida faoliyat yurutib kelamiz.\n"
-            "Bizning asosiy yo’nalishimiz — muzlatilgan go’sht va go’sht mahsulotlarini ishlab chiqarish.\n"
-            "Maqsadimiz — O’zbekiston bozoriga halol, sifatli va arzon go’sht mahsulotlarini yetkazib berish.\n"
-            "Biz mustahkam hamkorlik va mahsulot sifatini doimiy ravishda ta’minlaymiz."
-        )
-        await query.edit_message_text(
-            text=about_text,
-            parse_mode='HTML',
-            reply_markup=InlineKeyboardMarkup([
-                [InlineKeyboardButton('\U0001F519 Orqaga', callback_data='back')]
-            ])
-        )
+        about_text = ("\U0001F4D8 Biz haqimizda:\n\n"
+            "Biz 'Yunayted Invest' korxonasi O’zbekiston bozorida 4 yil davomida faoliyat yurutib kelamiz\n"
+            "Bizning asosiy yo’nalishimiz, muzlatilgan go’sht va go’sht mahsulotlarini ishlab chiqarish\n"
+            "Bizning maqsadimiz O’zbekiston bozoriga halol, sifatli va arzon go’sht mahsulotlarini yetkazib berish\n"
+            "Biz mustahkam hamkorlik va mahsulot\nsifatini doimiy ravishda ta’minlaymiz")
+        with open("meat/about.png", "rb") as photo:
+            await context.bot.send_photo(chat_id=query.message.chat_id, photo=photo, caption=about_text)
         await query.answer()
-
 
     elif data == "contacts":
         # First row: main contacts
